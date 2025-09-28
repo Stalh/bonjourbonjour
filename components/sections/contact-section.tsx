@@ -7,31 +7,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
-import type { Locale } from '@/lib/i18n/config';
 
-export function ContactSection({ dictionary, locale }: { dictionary: Dictionary['contact']; locale: Locale }) {
+export function ContactSection({ dictionary }: { dictionary: Dictionary['contact'] }) {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [submitted, setSubmitted] = useState(false);
   const slots = useMemo(() => ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'], []);
-  const dates = useMemo(() => {
-    if (locale === 'fr') {
-      return [
-        'Lundi 2 Décembre',
-        'Mardi 3 Décembre',
-        'Mercredi 4 Décembre',
-        'Jeudi 5 Décembre',
-        'Vendredi 6 Décembre'
-      ];
-    }
-    return [
-      'Monday 2 December',
-      'Tuesday 3 December',
-      'Wednesday 4 December',
-      'Thursday 5 December',
-      'Friday 6 December'
-    ];
-  }, [locale]);
+  const dates = useMemo(
+    () => [
+      'Lundi 2 Décembre',
+      'Mardi 3 Décembre',
+      'Mercredi 4 Décembre',
+      'Jeudi 5 Décembre',
+      'Vendredi 6 Décembre'
+    ],
+    []
+  );
 
   if (submitted) {
     return (
@@ -64,7 +55,7 @@ export function ContactSection({ dictionary, locale }: { dictionary: Dictionary[
           </div>
 
           <Button asChild className="mt-12 bg-primary px-8 py-3 text-white hover:bg-wood">
-            <a href={`/${locale}`}>{dictionary.form.confirmation.backHome}</a>
+            <a href="/">{dictionary.form.confirmation.backHome}</a>
           </Button>
         </div>
       </div>

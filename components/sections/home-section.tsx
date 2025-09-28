@@ -5,11 +5,9 @@ import { Button } from '@/components/ui/button';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 
 export function HomeSection({
-  dictionary,
-  locale
+  dictionary
 }: {
   dictionary: Dictionary['home'];
-  locale: string;
 }) {
   return (
     <div className="flex flex-col">
@@ -35,7 +33,7 @@ export function HomeSection({
               className="bg-accent px-8 py-4 text-lg text-white hover:bg-accent/90"
               asChild
             >
-              <Link href={`/${locale}/contact`}>{dictionary.hero.primaryCta}</Link>
+              <Link href="/contact">{dictionary.hero.primaryCta}</Link>
             </Button>
             <Button
               size="lg"
@@ -43,7 +41,7 @@ export function HomeSection({
               className="border-primary px-8 py-4 text-lg text-primary hover:bg-primary hover:text-primary-foreground"
               asChild
             >
-              <Link href={`/${locale}/methodology`}>{dictionary.hero.secondaryCta}</Link>
+              <Link href="/methodology">{dictionary.hero.secondaryCta}</Link>
             </Button>
           </div>
         </div>
@@ -105,7 +103,7 @@ export function HomeSection({
             className="mt-8 bg-accent px-8 py-4 text-lg text-white hover:bg-accent/90"
             asChild
           >
-            <Link href={`/${locale}/contact`}>
+            <Link href="/contact">
               {dictionary.trust.button}
               <ArrowRight className="ml-2 inline-block h-5 w-5" />
             </Link>

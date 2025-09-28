@@ -2,24 +2,21 @@ import { ArrowLeft, Award, Building, GraduationCap, Users } from 'lucide-react';
 import Link from 'next/link';
 
 import type { Dictionary } from '@/lib/i18n/dictionaries';
-import type { Locale } from '@/lib/i18n/config';
 
 export function FounderSection({
-  dictionary,
-  locale
+  dictionary
 }: {
   dictionary: Dictionary['founder'];
-  locale: Locale;
 }) {
   return (
     <div className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <Link
-          href={`/${locale}`}
+          href="/"
           className="mb-12 inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-gray-500 transition hover:text-primary"
         >
           <ArrowLeft className="h-5 w-5" />
-          {locale === 'fr' ? 'Retour' : 'Back'}
+          Retour
         </Link>
 
         <section className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -47,9 +44,7 @@ export function FounderSection({
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-gray-500">
                 <Users className="mx-auto mb-4 h-16 w-16 opacity-50" />
-                <span className="text-sm uppercase tracking-[0.3em]">
-                  {locale === 'fr' ? 'Portrait professionnel' : 'Professional portrait'}
-                </span>
+                <span className="text-sm uppercase tracking-[0.3em]">Portrait professionnel</span>
               </div>
             </div>
           </div>
@@ -148,7 +143,7 @@ export function FounderSection({
           </h2>
           <p className="mt-6 text-lg text-gray-300">{dictionary.cta.description}</p>
           <Link
-            href={`/${locale}/contact`}
+            href="/contact"
             className="mt-8 inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-lg text-white transition hover:bg-accent/90"
           >
             {dictionary.cta.button}

@@ -6,43 +6,29 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import type { NavigationLink } from '@/lib/i18n/dictionaries';
-import type { Locale } from '@/lib/i18n/config';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { LanguageSwitcher } from './language-switcher';
 
 export function Navigation({
   links,
   cta,
-  logo,
-  locale
+  logo
 }: {
   links: NavigationLink[];
   cta: string;
   logo: { primary: string; secondary: string };
-  locale: Locale;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const toggleMenu = () => setOpen((state) => !state);
 
-  const resolveHref = (href: string) => {
-    if (href === '/') {
-      return `/${locale}`;
-    }
-    return `/${locale}${href}`;
-  };
-
-  const isActive = (href: string) => {
-    const fullHref = resolveHref(href);
-    return pathname === fullHref;
-  };
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border/40 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-8">
-        <Link href={`/${locale}`} className="flex items-center gap-3" prefetch={false}>
+        <Link href="/" className="flex items-center gap-3" prefetch={false}>
           <span className="h-8 w-2 bg-wood" aria-hidden />
           <span>
             <span className="block text-2xl tracking-widest text-primary">{logo.primary}</span>
@@ -56,7 +42,7 @@ export function Navigation({
           {links.map((link) => (
             <Link
               key={link.href}
-              href={resolveHref(link.href)}
+              href={link.href}
               className={cn(
                 'text-sm uppercase tracking-[0.2em] text-gray-500 transition-colors hover:text-primary',
                 isActive(link.href) && 'text-primary'
@@ -67,14 +53,10 @@ export function Navigation({
             </Link>
           ))}
           <Button asChild className="px-6 py-2 text-sm uppercase tracking-[0.2em]">
-            <Link href={`/${locale}/contact`} prefetch={false}>
+            <Link href="/contact" prefetch={false}>
               {cta}
             </Link>
           </Button>
-        </div>
-
-        <div className="hidden md:flex md:items-center md:gap-6">
-          <LanguageSwitcher currentLocale={locale} />
         </div>
 
         <button
@@ -93,7 +75,7 @@ export function Navigation({
             {links.map((link) => (
               <Link
                 key={link.href}
-                href={resolveHref(link.href)}
+                href={link.href}
                 onClick={() => setOpen(false)}
                 className={cn(
                   'block rounded-md px-3 py-2 text-sm uppercase tracking-[0.2em] text-gray-600 transition-colors hover:bg-gray-100 hover:text-primary',
@@ -105,13 +87,10 @@ export function Navigation({
               </Link>
             ))}
             <Button className="w-full" asChild>
-              <Link href={`/${locale}/contact`} prefetch={false}>
+              <Link href="/contact" prefetch={false}>
                 {cta}
               </Link>
             </Button>
-            <div className="pt-4">
-              <LanguageSwitcher currentLocale={locale} />
-            </div>
           </div>
         </div>
       ) : null}
